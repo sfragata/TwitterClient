@@ -1,0 +1,54 @@
+<h1>Usuário</h1>
+<table cellpadding="0" cellspacing="0" border="0" class="display" id="user">
+	<thead>
+		<tr>
+			<th>Nome</th>
+			<th>Local</th>
+			<th>Time Zone</th>
+			<th>Descrição</th>
+			<th>Criado em</th>
+			<th>Seguidores</th>
+			<th>Amigos</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><%= @user.name %> (<%=@user.screen_name%>)</td>
+			<td><%= @user.location %></td>
+			<td><%= @user.time_zone %></td>
+			<td><%= @user.description %></td>
+			<td><%= string_2_date_formated(@user.created_at) %></td>
+			<td><%= @user.followers_count %></td>
+			<td><%= @user.friends_count %></td>
+		</tr>
+	</tbody> 
+</table>
+
+<h1>Twitts</h1>
+<table cellpadding="0" cellspacing="0" border="0" class="display" id="twitts">
+	<thead>
+		<tr>
+			<th>Data</th>
+			<th>Texto</th>
+		</tr>
+	</thead>
+	<tbody>
+		<%@twitts.each do |twitt| %>
+			<tr>
+				<td><%= string_2_date_formated(twitt.created_at)%></td>
+				<td><%= twitt.text %></td>
+			</tr>
+		<% end %>
+	</tbody> 
+</table>
+
+<%= content_for :js do%>
+$(document).ready(function() {
+	$('#twitts').dataTable({
+		"aoColumns": [
+			{ "bSortable": false },
+			null
+			]
+		});
+} );
+<%end%>

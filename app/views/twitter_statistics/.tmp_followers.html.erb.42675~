@@ -1,0 +1,25 @@
+<h1>Seguidores</h1>
+<table border="1">
+	<tr>
+		<th>Nome</th>
+		<th>Local</th>
+		<th>Time Zone</th>
+		<th>Descrição</th>
+		<th>Criado em</th>
+		<th>Seguidores</th>
+		<th>Amigos</th>
+	</tr>
+	<% @followers.each do |follower| %>
+		<tr>
+			<td><%= follower.name %> (<%=follower.screen_name%>)</td>
+			<td><%= follower.location %></td>
+			<td><%= follower.time_zone %></td>
+			<td><%= follower.description %></td>
+			<td><%= string_2_date_formated(follower.created_at) %></td>
+			<td><%= follower.followers_count %></td>
+			<td><%= follower.friends_count %></td>
+		</tr>
+	<% end %>
+</table>
+<br/>
+<%= link_to 'Voltar', { :action => 'index',:id => params[:id] } %>

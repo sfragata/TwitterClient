@@ -1,0 +1,7 @@
+<h1>Usuário</h1>
+
+<%= form_tag(:action =>"find", :method => "post") do %>
+  <%= label_tag(:user, "Usuário:") %>
+  <%= text_field_tag(:user) %>
+  <%= submit_tag("Find") %>
+<% end %>
