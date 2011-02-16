@@ -17,7 +17,7 @@ class User
     return Twitter.user_timeline(@user,{:count=>30,:trim_user=>true,:include_rts=>true})
   end
   
-  def user_friends()
+  def user_friends() 
     return Twitter.friends(@user).users
   end
 

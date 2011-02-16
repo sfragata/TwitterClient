@@ -45,7 +45,7 @@ class TwitterStatisticsController < ApplicationController
       end
     elsif
          redirect_to(:action => "index")
-    end
+    end 
   end
   
   def friends
