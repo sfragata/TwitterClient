@@ -1,6 +1,3 @@
-require "rubygems"
-require "twitter" #http://rdoc.info/gems/twitter/1.1.2/Twitter
-
 class TwitterStatisticsController < ApplicationController
   
   def logout
@@ -13,33 +10,35 @@ class TwitterStatisticsController < ApplicationController
   
   def find
     begin
-      if(session[:user] == nil || session[:user].empty?)
-        puts "sessao nula para a tag :user"
+      if(session[:user].nil? || session[:user].empty?)
         session[:user]=params[:user]
       end
-      if session[:user] != nil && !session[:user].empty?
-        @user=Twitter.user(session[:user])
-        @twitts=Twitter.user_timeline(session[:user],{:count=>30,:trim_user=>true,:include_rts=>true})
+      if !session[:user].nil? && !session[:user].empty?
+        user = User.new(session[:user])
+        @user=user.user
+        @twitts=user.user_timeline
         respond_to do |format|
-          format.html # index.html.erb
+          format.html
           format.xml  { render :xml => @user}
         end
       elsif
          redirect_to(:action => "index")
       end
     rescue SocketError => e
-      render :text => "Error: #{e}"
+       session[:user] = nil
+       flash[:erro] = e
+       redirect_to(:action => "erro")
     end
-    rescue Twitter::NotFound => t
-         flash[:notfound] = "Usuario #{session[:user]} nao encontrado "
+    rescue Twitter::NotFound
+         flash[:notfound] = session[:user]
          session[:user] = nil
          redirect_to(:action => "notfound")
     end
   
   def followers
-    puts "user: #{session[:user]}"
-    if session[:user] != nil && !session[:user].empty?
-      @followers=Twitter.followers(session[:user]).users
+    if !session[:user].nil? && !session[:user].empty?
+      user = User.new(session[:user])
+      @followers=user.user_followers
       respond_to do |format|
         format.html 
         format.xml  { render :xml => @followers}
@@ -50,8 +49,9 @@ class TwitterStatisticsController < ApplicationController
   end
   
   def friends
-    if session[:user] != nil && !session[:user].empty?
-      @friends=Twitter.friends(session[:user]).users
+    if !session[:user].nil? && !session[:user].empty?
+      user = User.new(session[:user])
+      @friends=user.user_friends
       respond_to do |format|
         format.html 
         format.xml  { render :xml => @friends}
@@ -66,4 +66,5 @@ class TwitterStatisticsController < ApplicationController
         format.html 
       end
   end
+  
 end

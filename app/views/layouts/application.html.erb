@@ -1,23 +1,31 @@
-<!DOCTYPE html>
 <html>
-<head>
-  <title>TwitterClient</title>
-  <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag "jquery", "rails", "jquery.dataTables" %>
-  <%= csrf_meta_tag %>
-  <script type="text/javascript"><%=yield :js%></script>  
-</head>
-<body>
-<%if session[:user] !=nil %>
-<ul id="menu">
-	<li><%= link_to 'Home', { :action => 'find' } %></li>
-	<li><%= link_to 'Amigos', { :action => 'friends' } %></li>
-	<li><%= link_to 'Seguidores', { :action => 'followers' } %></li>
-	<li><%= link_to 'Sair', { :action => 'logout' } %></li>
-</ul>
-<%end%>
-<br>
-<%= yield %>
-<br>
-</body>
+    <head>
+        <title>TwitterClient</title>
+        <%= stylesheet_link_tag :all %>
+        <%= javascript_include_tag "jquery", "rails", "jquery.dataTables" %>
+        <%= csrf_meta_tag %>
+        <script type="text/javascript"><%=yield :js%>
+        </script>
+    </head>
+    <body>
+        <%if !session[:user].nil? %>
+	        <ul id="menu">
+	            <li>
+	                <%= link_to 'Home', { :action => 'find' } %>
+	            </li>
+	            <li>
+	                <%= link_to 'Amigos', { :action => 'friends' } %>
+	            </li>
+	            <li>
+	                <%= link_to 'Seguidores', { :action => 'followers' } %>
+	            </li>
+	            <li>
+	                <%= link_to 'Sair', { :action => 'logout' } %>
+	            </li>
+	        </ul>
+        <%end %>
+        <br>
+        <%= yield %>
+        <br>
+    </body>
 </html>
