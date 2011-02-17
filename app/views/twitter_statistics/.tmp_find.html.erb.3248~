@@ -13,7 +13,7 @@
 	</thead>
 	<tbody>
 		<tr>
-			<td><img src="<%=@user.profile_image_url%>" alt="Imagem"><br><%= @user.name %> (<%=@user.screen_name%>)</td>
+			<td><%= @user.name %> (<%=@user.screen_name%>)</td>
 			<td><%= @user.location %></td>
 			<td><%= @user.time_zone %></td>
 			<td><%= @user.description %></td>
@@ -29,23 +29,14 @@
 	<thead>
 		<tr>
 			<th>Data</th>
-			<th>Twitt</th>
+			<th>Texto</th>
 		</tr>
 	</thead>
 	<tbody>
 		<%@twitts.each do |twitt| %>
-			
-			<%
-			imagem=nil
-			if twitt.respond_to? "retweeted_status"
-				imagem=twitt.retweeted_status.user.profile_image_url
-			else
-				imagem=twitt.user.profile_image_url
-			end
-			%>
 			<tr>
 				<td><%= string_2_date_formated(twitt.created_at)%></td>
-				<td><img src="<%=imagem%>" alt="Imagem"><br><span><%= twitt.text %></span></td>
+				<td><%= twitt.text %></td>
 			</tr>
 		<% end %>
 	</tbody> 
@@ -56,7 +47,7 @@ $(document).ready(function() {
 	$('#twitts').dataTable({
 		"aaSorting": [],
 		"aoColumns": [
-			{ "sType": "date-euro" },
+			{ "bSortable": false },
 			null
 			]
 		});

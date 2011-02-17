@@ -14,7 +14,7 @@
 	<tbody>
 		<%@friends.each do |friend| %>
 			<tr>
-				<td><img src="<%=friend.profile_image_url%>" alt="Imagem"><br><%= friend.name %> (<%=friend.screen_name%>)</td>
+				<td><%= friend.name %> (<%=friend.screen_name%>)</td>
 				<td><%= friend.location %></td>
 				<td><%= friend.time_zone %></td>
 				<td><%= friend.description %></td>

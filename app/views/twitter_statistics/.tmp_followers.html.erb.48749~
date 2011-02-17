@@ -14,7 +14,7 @@
 	<tbody>
 		<%@followers.each do |follower| %>
 			<tr>
-				<td><img src="<%=follower.profile_image_url%>" alt="Imagem"><br><%= follower.name %> (<%=follower.screen_name%>)</td>
+				<td><%= follower.name %> (<%=follower.screen_name%>)</td>
 				<td><%= follower.location %></td>
 				<td><%= follower.time_zone %></td>
 				<td><%= follower.description %></td>
