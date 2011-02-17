@@ -1,5 +1,0 @@
-<h1>Erro</h1>
-<p>
-Usuário <b><%=flash[:notfound]%></b> não existe
-</p> 
-<%= link_to 'Voltar', { :action => 'index' } %>

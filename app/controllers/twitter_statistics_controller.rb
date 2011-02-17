@@ -3,7 +3,7 @@ class TwitterStatisticsController < ApplicationController
   def logout
     redirect_to(:action => "index")   
   end
-  
+   
   def index
     session[:user] = nil
   end

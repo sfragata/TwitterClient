@@ -3,7 +3,7 @@ require "twitter" #http://rdoc.info/gems/twitter/1.1.2/Twitter
 
 class User
   
-  @user
+  @user 
   
   def initialize(user)
     @user = user
