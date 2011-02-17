@@ -1,3 +1,4 @@
+<%= render :partial => "menu" %>
 <h1>Usuário</h1>
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="user">
 	<thead> 
@@ -45,7 +46,7 @@
 			%>
 			<tr>
 				<td><%= string_2_date_formated(twitt.created_at)%></td>
-				<td><img src="<%=imagem%>" alt="Imagem"><br><span><%= twitt.text %></span></td>
+				<td><span><img src="<%=imagem%>" alt="Imagem"></span><span><%= twitt.text %></span></td>
 			</tr>
 		<% end %>
 	</tbody> 
