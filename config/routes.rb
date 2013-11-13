@@ -57,6 +57,7 @@ TwitterClient::Application.routes.draw do
   
 #  match ':controller(/:action(/:id(.:format)))'
   
+  get "twitter_statistics/toomanyrequests"
   get "twitter_statistics/followers"
   get "twitter_statistics/friends"
   get "twitter_statistics/index"

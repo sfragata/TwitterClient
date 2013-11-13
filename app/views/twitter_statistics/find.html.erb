@@ -1,20 +1,20 @@
 <%= render :partial => "menu" %>
-<h1>Usuário</h1>
+<h1>User</h1>
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="user">
 	<thead> 
 		<tr>
-			<th>Nome</th>
-			<th>Local</th>
+			<th>Name</th>
+			<th>Location</th>
 			<th>Time Zone</th>
-			<th>Descrição</th>
-			<th>Criado em</th>
-			<th>Seguidores</th>
-			<th>Amigos</th>
+			<th>Description</th>
+			<th>Created at</th>
+			<th>Followers</th>
+			<th>Friends</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
-			<td><img src="<%=@user.profile_image_url%>" alt="Imagem"><br><%= @user.name %> (<%=@user.screen_name%>)</td>
+			<td><img src="<%=@user.profile_image_url%>" alt="Image"><br><%= @user.name %> (<%=@user.screen_name%>)</td>
 			<td><%= @user.location %></td>
 			<td><%= @user.time_zone %></td>
 			<td><%= @user.description %></td>
@@ -25,28 +25,28 @@
 	</tbody> 
 </table>
 
-<h1>Twitts</h1>
+<h1>Timeline</h1>
 <table cellpadding="0" cellspacing="0" border="0" class="display" id="twitts">
 	<thead>
 		<tr>
-			<th>Data</th>
-			<th>Twitt</th>
+			<th>Date</th>
+			<th>Text</th>
 		</tr>
 	</thead>
 	<tbody>
 		<%@twitts.each do |twitt| %>
 			
 			<%
-			imagem=nil
-			if twitt.respond_to? "retweeted_status"
-				imagem=twitt.retweeted_status.user.profile_image_url
+			image=nil
+			if twitt.respond_to? "retweeted_status" and !twitt.retweeted_status.nil?
+				image = twitt.retweeted_status.user.profile_image_url
 			else
-				imagem=twitt.user.profile_image_url
+				image = twitt.user.profile_image_url
 			end
 			%>
 			<tr>
-				<td><%= string_2_date_formated(twitt.created_at)%></td>
-				<td><span><img src="<%=imagem%>" alt="Imagem"></span><span><%= twitt.text %></span></td>
+				<td><%= string_2_date_formated(twitt.created_at) %></td>
+				<td><span><img src="<%=image%>" alt="Image"></span><span><%= twitt.text %></span></td>
 			</tr>
 		<% end %>
 	</tbody> 
@@ -57,7 +57,7 @@ $(document).ready(function() {
 	$('#twitts').dataTable({
 		"aaSorting": [],
 		"aoColumns": [
-			{ "sType": "date-euro" },
+			{ "sType": "date" },
 			null
 			]
 		});

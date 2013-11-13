@@ -18,11 +18,10 @@ class User
   end
   
   def user_friends() 
-    return Twitter.friends(@user).users
+    return Twitter.friends(@user).all
   end
 
   def user_followers()
-    return Twitter.followers(@user).users
-    #.sort{|a, b| a.followers_count <=> b.followers_count}
+    return Twitter.followers(@user).all
   end
 end

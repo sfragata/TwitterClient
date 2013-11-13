@@ -5,7 +5,7 @@ gem 'rails', '3.0.3'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-#gem 'sqlite3-ruby', :require => 'sqlite3'
+gem 'sqlite3-ruby', :require => 'sqlite3'
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -32,3 +32,5 @@ gem 'rails', '3.0.3'
 gem "twitter"
 
 gem "jquery-rails", ">= 0.2.6"
+
+gem 'figaro'

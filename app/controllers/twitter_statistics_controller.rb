@@ -29,35 +29,45 @@ class TwitterStatisticsController < ApplicationController
        flash[:erro] = e
        redirect_to(:action => "erro")
     end
-    rescue Twitter::NotFound
+    rescue Twitter::Error::NotFound
          flash[:notfound] = session[:user]
          session[:user] = nil
          redirect_to(:action => "notfound")
-    end
+    rescue Twitter::Error::TooManyRequests
+         redirect_to(:action => "toomanyrequests")
+  end
   
   def followers
-    if !session[:user].nil? && !session[:user].empty?
-      user = User.new(session[:user])
-      @followers=user.user_followers
-      respond_to do |format|
-        format.html 
-        format.xml  { render :xml => @followers}
-      end
-    elsif
-         redirect_to(:action => "index")
-    end 
+    begin
+      if !session[:user].nil? && !session[:user].empty?
+        user = User.new(session[:user])
+        @followers=user.user_followers
+        respond_to do |format|
+          format.html 
+          format.xml  { render :xml => @followers}
+        end
+      elsif
+           redirect_to(:action => "index")
+      end 
+    rescue Twitter::Error::TooManyRequests
+         redirect_to(:action => "toomanyrequests")
+    end
   end
   
   def friends
-    if !session[:user].nil? && !session[:user].empty?
-      user = User.new(session[:user])
-      @friends=user.user_friends
-      respond_to do |format|
-        format.html 
-        format.xml  { render :xml => @friends}
+    begin
+      if !session[:user].nil? && !session[:user].empty?
+        user = User.new(session[:user])
+        @friends=user.user_friends
+        respond_to do |format|
+          format.html 
+          format.xml  { render :xml => @friends}
+        end
+      elsif
+           redirect_to(:action => "index")
       end
-    elsif
-         redirect_to(:action => "index")
+    rescue Twitter::Error::TooManyRequests
+         redirect_to(:action => "toomanyrequests")
     end
   end
   
